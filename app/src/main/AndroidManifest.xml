@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.registercontacts">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="App Contatos"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.RegisterContacts">
+        <activity
+            android:name=".View.SignUp"
+            android:exported="false"
+            android:label="Cadastrar"/>
+        <activity
+            android:name=".View.RegisterContacts"
+            android:exported="false"
+            android:label="Registrar"/>
+        <activity
+            android:name=".View.Contacts"
+            android:exported="false"
+            android:label="Contatos"/>
+        <activity
+            android:name=".View.Login"
+            android:exported="false"
+            android:label="Login"/>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
