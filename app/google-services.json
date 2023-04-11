@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "120004523901",
+    "project_id": "registercontacts",
+    "storage_bucket": "registercontacts.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120004523901:android:8b20b0618a46406c163e14",
+        "android_client_info": {
+          "package_name": "com.example.registercontacts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120004523901-or73solmpu3gtqv5nnqi2fd6js8nrj4a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAV8X2zqaXuHkwO06sq-YsGN35KdtYSkjU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "120004523901-or73solmpu3gtqv5nnqi2fd6js8nrj4a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

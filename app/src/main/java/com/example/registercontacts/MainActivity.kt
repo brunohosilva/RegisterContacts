@@ -20,11 +20,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         setUpListener()
-
-
-
-
-
     }
 
     private fun setUpListener() {
