@@ -1,17 +1,16 @@
 package com.example.registercontacts.View
 
 import android.app.AlertDialog
-import android.content.DialogInterface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.registercontacts.R
 import com.example.registercontacts.databinding.ActivityRegisterContactsBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import java.util.UUID
+import java.util.*
 
 class RegisterContacts : AppCompatActivity() {
     private var db = Firebase.firestore
@@ -33,6 +32,7 @@ class RegisterContacts : AppCompatActivity() {
     }
 
     private fun getFields() {
+
         binding.btnSalvar.setOnClickListener(View.OnClickListener {
 
             val email = binding.emailInput.text.toString()
@@ -54,13 +54,24 @@ class RegisterContacts : AppCompatActivity() {
     }
 
     private fun validateFields(email: String, name: String, phone: String): Boolean {
+
         if(email.isEmpty() or phone.isEmpty() or name.isEmpty()){
-            basicAlert()
+            basicAlert("Preencher todos os campos")
+            return false
+        } else if (!isValidEmail(email)) {
+            basicAlert("E-mail inválido")
             return false
         }
 
         return true
     }
+
+    private fun isValidEmail(email: String): Boolean {
+        val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\$"
+        return email.matches(emailRegex.toRegex())
+    }
+
+
 
     private fun saveContactsDB(contact: HashMap<String, String>) {
 
@@ -82,12 +93,12 @@ class RegisterContacts : AppCompatActivity() {
             }
     }
 
-    private fun basicAlert() {
+    private fun basicAlert(msg: String) {
         val builder = AlertDialog.Builder(this)
         with(builder)
         {
             setTitle("Atenção")
-            setMessage("Todos os campos precisam ser preenchidos")
+            setMessage(msg)
             setPositiveButton("OK", null)
             show()
         }
