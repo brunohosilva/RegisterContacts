@@ -2,27 +2,33 @@ package com.example.registercontacts.View
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import com.example.registercontacts.R
-import com.example.registercontacts.databinding.ActivityRegisterContactsBinding
+import androidx.fragment.app.Fragment
+import com.example.registercontacts.databinding.FragmentRegisterContactsBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
 
-class RegisterContacts : AppCompatActivity() {
-    private var db = Firebase.firestore
-    private lateinit var binding: ActivityRegisterContactsBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register_contacts)
 
-        binding = ActivityRegisterContactsBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+class RegisterContactsFragment : Fragment() {
+    private var db = Firebase.firestore
+    private var _binding:FragmentRegisterContactsBinding? = null;
+    private val binding get() = _binding!!;
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        _binding = FragmentRegisterContactsBinding.inflate(inflater, container, false)
+        val view = binding.root;
         getFields()
+        return view;
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun clearFields() {
@@ -103,20 +109,20 @@ class RegisterContacts : AppCompatActivity() {
             .addOnSuccessListener {
                 clearFields()
                 Toast.makeText(
-                    this.applicationContext,
+                    activity,
                     "Contato salvo com sucesso!!",
                     Toast.LENGTH_LONG).show()
             }
             .addOnFailureListener {
                 Toast.makeText(
-                    this.applicationContext,
+                    activity,
                     "Falha ao salvar contato, tente novamente!",
                     Toast.LENGTH_LONG).show()
             }
     }
 
     private fun basicAlert(msg: String) {
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(activity)
         with(builder)
         {
             setTitle("Atenção")
@@ -125,4 +131,7 @@ class RegisterContacts : AppCompatActivity() {
             show()
         }
     }
+
+
+
 }
