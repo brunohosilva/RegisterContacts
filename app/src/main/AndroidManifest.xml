@@ -16,7 +16,7 @@
         <activity
             android:name=".View.RegisterContacts"
             android:exported="false"
-            android:label="Registrar"/>
+            android:label="Registrar novo contato"/>
         <activity
             android:name=".View.Contacts"
             android:exported="false"

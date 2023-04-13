@@ -29,6 +29,9 @@ class RegisterContacts : AppCompatActivity() {
         binding.emailInput.setText("")
         binding.phoneInput.setText("")
         binding.nameInput.setText("")
+        binding.postalAddressInput.setText("")
+        binding.birthInput.setText("")
+        binding.jobInput.setText("")
     }
 
     private fun getFields() {
@@ -38,14 +41,21 @@ class RegisterContacts : AppCompatActivity() {
             val email = binding.emailInput.text.toString()
             val name = binding.nameInput.text.toString()
             val phone = binding.phoneInput.text.toString()
+            val birthDate = binding.birthInput.text.toString()
+            val job = binding.jobInput.text.toString()
+            val postalAddress = binding.postalAddressInput.text.toString()
 
-            val allFieldsValid: Boolean = validateFields(email, name, phone)
+
+            val allFieldsValid: Boolean = validateFields(email, name, phone, birthDate, job, postalAddress)
 
             if (allFieldsValid) {
                 val contact = hashMapOf(
                     "name" to name,
                     "phone" to phone,
-                    "email" to email
+                    "email" to email,
+                    "birthDate" to birthDate,
+                    "job" to job,
+                    "postalAddress" to postalAddress
                 )
 
                 saveContactsDB(contact)
@@ -53,9 +63,23 @@ class RegisterContacts : AppCompatActivity() {
         })
     }
 
-    private fun validateFields(email: String, name: String, phone: String): Boolean {
+    private fun validateFields(
+        email: String,
+        name: String,
+        phone: String,
+        job: String,
+        birthDate: String,
+        postalAddress: String
+    ): Boolean {
 
-        if(email.isEmpty() or phone.isEmpty() or name.isEmpty()){
+        if(
+            email.isEmpty() or
+            phone.isEmpty() or
+            name.isEmpty() or
+            job.isEmpty() or
+            birthDate.isEmpty() or
+            postalAddress.isEmpty()
+        ){
             basicAlert("Preencher todos os campos")
             return false
         } else if (!isValidEmail(email)) {
@@ -70,8 +94,6 @@ class RegisterContacts : AppCompatActivity() {
         val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\$"
         return email.matches(emailRegex.toRegex())
     }
-
-
 
     private fun saveContactsDB(contact: HashMap<String, String>) {
 
