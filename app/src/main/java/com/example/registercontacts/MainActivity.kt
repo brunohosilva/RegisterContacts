@@ -1,9 +1,7 @@
 package com.example.registercontacts
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.registercontacts.View.*
 import com.example.registercontacts.databinding.ActivityMainBinding
@@ -19,11 +17,11 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(ListContactsFragment())
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.contatos -> replaceFragment(ListContactsFragment())
                 R.id.adicionar_contatos -> replaceFragment(RegisterContactsFragment())
 
-                else  -> {
+                else -> {
 
                 }
 
