@@ -9,21 +9,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RegisterContacts">
         <activity
+            android:name=".Contacts"
+            android:exported="false" />
+        <activity
             android:name=".View.SignUp"
             android:exported="false"
-            android:label="Cadastrar"/>
+            android:label="Cadastrar" />
         <activity
             android:name=".View.RegisterContacts"
             android:exported="false"
-            android:label="Registrar novo contato"/>
+            android:label="Registrar novo contato" />
         <activity
             android:name=".View.Contacts"
             android:exported="false"
-            android:label="Contatos"/>
-        <activity
-            android:name=".View.Login"
-            android:exported="false"
-            android:label="Login"/>
+            android:label="Contatos" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
