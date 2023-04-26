@@ -33,10 +33,10 @@ class MainActivity : AppCompatActivity() {
     public override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
-//        if (currentUser != null) {
-//            val intent = Intent(this, Contacts::class.java)
-//            startActivity(intent)
-//        }
+        if (currentUser != null) {
+            val intent = Intent(this, Contacts::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setUpListener() {
