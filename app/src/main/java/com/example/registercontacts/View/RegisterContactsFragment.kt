@@ -15,15 +15,15 @@ import java.util.*
 
 class RegisterContactsFragment : Fragment() {
     private var db = Firebase.firestore
-    private var _binding:FragmentRegisterContactsBinding? = null;
-    private val binding get() = _binding!!;
+    private var _binding:FragmentRegisterContactsBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         _binding = FragmentRegisterContactsBinding.inflate(inflater, container, false)
-        val view = binding.root;
+        val view = binding.root
         getFields()
-        return view;
+        return view
     }
 
     override fun onDestroyView() {
@@ -42,7 +42,7 @@ class RegisterContactsFragment : Fragment() {
 
     private fun getFields() {
 
-        binding.btnSalvar.setOnClickListener(View.OnClickListener {
+        binding.btnSalvar.setOnClickListener {
 
             val email = binding.emailInput.text.toString()
             val name = binding.nameInput.text.toString()
@@ -52,7 +52,8 @@ class RegisterContactsFragment : Fragment() {
             val postalAddress = binding.postalAddressInput.text.toString()
 
 
-            val allFieldsValid: Boolean = validateFields(email, name, phone, birthDate, job, postalAddress)
+            val allFieldsValid: Boolean =
+                validateFields(email, name, phone, birthDate, job, postalAddress)
 
             if (allFieldsValid) {
                 val contact = hashMapOf(
@@ -66,7 +67,7 @@ class RegisterContactsFragment : Fragment() {
 
                 saveContactsDB(contact)
             }
-        })
+        }
     }
 
     private fun validateFields(
