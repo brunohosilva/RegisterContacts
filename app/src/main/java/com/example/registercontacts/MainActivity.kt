@@ -3,8 +3,11 @@ package com.example.registercontacts
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.registercontacts.View.*
 import com.example.registercontacts.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -30,10 +33,10 @@ class MainActivity : AppCompatActivity() {
     public override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
-        if (currentUser != null) {
-            val intent = Intent(this, Contacts::class.java)
-            startActivity(intent)
-        }
+//        if (currentUser != null) {
+//            val intent = Intent(this, Contacts::class.java)
+//            startActivity(intent)
+//        }
     }
 
     private fun setUpListener() {
