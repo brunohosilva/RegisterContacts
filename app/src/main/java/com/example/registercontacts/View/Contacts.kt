@@ -1,12 +1,10 @@
-package com.example.registercontacts
+package com.example.registercontacts.View
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.registercontacts.View.ListContactsFragment
-import com.example.registercontacts.View.RegisterContactsFragment
+import com.example.registercontacts.R
 import com.example.registercontacts.databinding.ActivityContactsBinding
-import com.example.registercontacts.databinding.ActivityMainBinding
 
 class Contacts : AppCompatActivity() {
     private lateinit var binding: ActivityContactsBinding

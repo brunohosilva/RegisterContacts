@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RegisterContacts">
         <activity
-            android:name=".Contacts"
+            android:name=".View.Contacts"
             android:exported="false" />
         <activity
             android:name=".View.SignUp"
