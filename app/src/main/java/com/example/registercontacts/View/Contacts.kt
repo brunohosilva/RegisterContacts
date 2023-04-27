@@ -10,9 +10,11 @@ class Contacts : AppCompatActivity() {
     private lateinit var binding: ActivityContactsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contacts)
-        replaceFragment(ListContactsFragment())
+        setContentView(R.layout.activity_main)
         binding = ActivityContactsBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+        replaceFragment(ListContactsFragment())
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.contatos -> replaceFragment(ListContactsFragment())
