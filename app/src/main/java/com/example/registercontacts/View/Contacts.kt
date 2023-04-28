@@ -20,11 +20,7 @@ class Contacts : AppCompatActivity() {
                 R.id.contatos -> replaceFragment(ListContactsFragment())
                 R.id.adicionar_contatos -> replaceFragment(RegisterContactsFragment())
 
-                else -> {
-
-                }
-
-
+                else -> {}
             }
             true
         }
