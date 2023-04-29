@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import com.example.registercontacts.databinding.FragmentRegisterContactsBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -53,7 +55,7 @@ class RegisterContactsFragment : Fragment() {
 
 
             val allFieldsValid: Boolean =
-                validateFields(email, name, phone, birthDate, job, postalAddress)
+                validateFields(email, name, phone, job, birthDate, postalAddress)
 
             if (allFieldsValid) {
                 val contact = hashMapOf(
@@ -78,28 +80,63 @@ class RegisterContactsFragment : Fragment() {
         birthDate: String,
         postalAddress: String
     ): Boolean {
+        var allFieldsValid = true
 
-        if(
-            email.isEmpty() or
-            phone.isEmpty() or
-            name.isEmpty() or
-            job.isEmpty() or
-            birthDate.isEmpty() or
-            postalAddress.isEmpty()
-        ){
-            basicAlert("Preencher todos os campos")
-            return false
-        } else if (!isValidEmail(email)) {
-            basicAlert("E-mail inválido")
+        if (name.isEmpty()) {
+            binding.nameInput.setError("O nome é obrigatório")
+            allFieldsValid = false
+        }
+
+        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.emailInput.setError("Insira um e-mail válido")
+            allFieldsValid = false
+        }
+
+        if (!validatePhone(phone)) {
+            binding.phoneInput.setError("Telefone inválido\nExemplo: (xx) xxxxx-xxxx")
+            allFieldsValid = false
+        }
+
+        if (!validatePostalAddress(postalAddress)) {
+            binding.postalAddressInput.setError("CEP inválido\nExemplo: xxxxxxxx")
+            allFieldsValid = false
+        }
+
+        if (job.isEmpty()) {
+            binding.jobInput.setError("O campo de trabalho é obrigatório")
+            allFieldsValid = false
+        }
+
+        if (!validateDateOfBirth(birthDate)) {
+            binding.birthInput.setError("Data de nascimento inválido\nEx: dd/mm/yyyy")
+            allFieldsValid = false
+        }
+
+        return allFieldsValid
+    }
+
+    private fun validatePhone(phone: String): Boolean {
+        val regex = """\(\d{2}\)\s\d{4,5}-\d{4}""".toRegex()
+        return regex.matches(phone)
+    }
+
+    private fun validatePostalAddress(postalAddress: String): Boolean {
+        return postalAddress.matches("\\d{8}".toRegex())
+    }
+
+    private fun validateDateOfBirth(dateOfBirth: String): Boolean {
+                if (dateOfBirth.isEmpty()) {
             return false
         }
 
+        try {
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy")
+            dateFormat.isLenient = false
+            dateFormat.parse(dateOfBirth)
+        } catch (e: ParseException) {
+            return false
+        }
         return true
-    }
-
-    private fun isValidEmail(email: String): Boolean {
-        val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\$"
-        return email.matches(emailRegex.toRegex())
     }
 
     private fun saveContactsDB(contact: HashMap<String, String>) {
