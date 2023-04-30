@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.registercontacts.Adapter.CurrentContact
+import com.example.registercontacts.Model.Contact
 import com.example.registercontacts.databinding.FragmentRegisterContactsBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -19,6 +21,7 @@ class RegisterContactsFragment : Fragment() {
     private var db = Firebase.firestore
     private var _binding:FragmentRegisterContactsBinding? = null
     private val binding get() = _binding!!
+    val contact: Contact? = CurrentContact.contact
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -26,6 +29,13 @@ class RegisterContactsFragment : Fragment() {
         val view = binding.root
         getFields()
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        contact?.let { c ->
+            fillContactFields(c)
+        }
     }
 
     override fun onDestroyView() {
@@ -40,6 +50,15 @@ class RegisterContactsFragment : Fragment() {
         binding.postalAddressInput.setText("")
         binding.birthInput.setText("")
         binding.jobInput.setText("")
+    }
+
+    private fun fillContactFields(contact: Contact) {
+        binding.nameInput.setText(contact.name)
+        binding.emailInput.setText(contact.email)
+        binding.phoneInput.setText(contact.phone)
+        binding.jobInput.setText(contact.job)
+        binding.postalAddressInput.setText(contact.postalAddress)
+        binding.birthInput.setText(contact.birthDate)
     }
 
     private fun getFields() {
@@ -141,22 +160,41 @@ class RegisterContactsFragment : Fragment() {
 
     private fun saveContactsDB(contact: HashMap<String, String>) {
 
-        val id = UUID.randomUUID().toString()
-        db.collection("contacts").document(id)
-            .set(contact)
-            .addOnSuccessListener {
-                clearFields()
-                Toast.makeText(
-                    activity,
-                    "Contato salvo com sucesso!!",
-                    Toast.LENGTH_LONG).show()
-            }
-            .addOnFailureListener {
-                Toast.makeText(
-                    activity,
-                    "Falha ao salvar contato, tente novamente!",
-                    Toast.LENGTH_LONG).show()
-            }
+        if(this.contact != null) {
+            getFields()
+            val userRef = db.collection("contacts").document(this.contact.id!!)
+            userRef.update(contact as Map<String, Any>)
+                .addOnSuccessListener {
+                    Toast.makeText(
+                        activity,
+                        "Contato editado com sucesso!!",
+                        Toast.LENGTH_LONG).show()
+                }
+                .addOnFailureListener { exception ->
+                    Toast.makeText(
+                        activity,
+                        "Falha ao editar contato, tente novamente!",
+                        Toast.LENGTH_LONG).show()
+                }
+
+        } else {
+            val id = UUID.randomUUID().toString()
+            db.collection("contacts").document(id)
+                .set(contact)
+                .addOnSuccessListener {
+                    clearFields()
+                    Toast.makeText(
+                        activity,
+                        "Contato salvo com sucesso!!",
+                        Toast.LENGTH_LONG).show()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(
+                        activity,
+                        "Falha ao salvar contato, tente novamente!",
+                        Toast.LENGTH_LONG).show()
+                }
+        }
     }
 
     private fun basicAlert(msg: String) {

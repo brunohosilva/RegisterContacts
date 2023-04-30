@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.registercontacts.Adapter.ContactAdapter
+import com.example.registercontacts.Adapter.CurrentContact
 import com.example.registercontacts.Model.Contact
 import com.example.registercontacts.R
 import com.example.registercontacts.databinding.ContactItemBinding
@@ -22,7 +24,7 @@ import com.google.firebase.ktx.Firebase
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class ListContactsFragment : Fragment() {
+class ListContactsFragment : Fragment(), ContactAdapter.OnEditClickListener {
     private var param1: String? = null
     private var param2: String? = null
 
@@ -78,7 +80,17 @@ class ListContactsFragment : Fragment() {
                         contactList.add(contact)
                     }
                 }
-                recyclerView.adapter = ContactAdapter(contactList)
+                recyclerView.adapter = ContactAdapter(contactList, this)
             }
+    }
+
+    override fun onEditClick(contact: Contact) {
+        if (CurrentContact.contact != null) {
+            val registerContactsFragment = RegisterContactsFragment()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.frame_layout, registerContactsFragment)
+                .addToBackStack(null)
+                .commit()
+        }
     }
 }
