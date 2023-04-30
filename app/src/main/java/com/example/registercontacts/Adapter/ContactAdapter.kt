@@ -13,10 +13,18 @@ import com.example.registercontacts.databinding.ContactItemBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-
+object CurrentContact {
+    var contact: Contact? = null
+}
 class ContactAdapter(
-    private val contactList: ArrayList<Contact>
+    private val contactList: ArrayList<Contact>,
+    private val onEditClickListener: OnEditClickListener
 ) : RecyclerView.Adapter<ContactAdapter.MyViewHolder>() {
+
+    interface OnEditClickListener {
+        fun onEditClick(contact: Contact)
+    }
+
     private var db = Firebase.firestore
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(
@@ -39,6 +47,13 @@ class ContactAdapter(
             db = FirebaseFirestore.getInstance()
             db.collection("contacts").document(keyContact).delete()
         }
+
+        holder.btnEdit.setOnClickListener {
+            val currentContactToEdit = contactList[position]
+            CurrentContact.contact = currentContactToEdit
+            onEditClickListener.onEditClick(currentContactToEdit)
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -50,5 +65,6 @@ class ContactAdapter(
         val contactPhone: TextView = itemView.findViewById(R.id.tvcontactPhone)
         val contactJob: TextView = itemView.findViewById(R.id.tvcontactJob)
         var btnDelete: Button = itemView.findViewById(R.id.btn_apagar)
+        var btnEdit: Button = itemView.findViewById(R.id.btn_editar)
     }
 }
