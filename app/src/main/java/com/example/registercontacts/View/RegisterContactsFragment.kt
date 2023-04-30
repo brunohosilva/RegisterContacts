@@ -1,6 +1,5 @@
 package com.example.registercontacts.View
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,22 +8,23 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.registercontacts.Adapter.CurrentContact
 import com.example.registercontacts.Model.Contact
+import com.example.registercontacts.R
 import com.example.registercontacts.databinding.FragmentRegisterContactsBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.UUID
 
 
 class RegisterContactsFragment : Fragment() {
     private var db = Firebase.firestore
     private var _binding:FragmentRegisterContactsBinding? = null
     private val binding get() = _binding!!
-    val contact: Contact? = CurrentContact.contact
+    private val contact: Contact? = CurrentContact.contact
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         _binding = FragmentRegisterContactsBinding.inflate(inflater, container, false)
         val view = binding.root
         getFields()
@@ -102,32 +102,32 @@ class RegisterContactsFragment : Fragment() {
         var allFieldsValid = true
 
         if (name.isEmpty()) {
-            binding.nameInput.setError("O nome é obrigatório")
+            binding.nameInput.error = getString(R.string.error_register_name)
             allFieldsValid = false
         }
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            binding.emailInput.setError("Insira um e-mail válido")
+            binding.emailInput.error = getString(R.string.error_register_mail)
             allFieldsValid = false
         }
 
         if (!validatePhone(phone)) {
-            binding.phoneInput.setError("Telefone inválido\nExemplo: (xx) xxxxx-xxxx")
+            binding.phoneInput.error = getString(R.string.error_register_phone)
             allFieldsValid = false
         }
 
         if (!validatePostalAddress(postalAddress)) {
-            binding.postalAddressInput.setError("CEP inválido\nExemplo: xxxxxxxx")
+            binding.postalAddressInput.error = getString(R.string.error_register_cep)
             allFieldsValid = false
         }
 
         if (job.isEmpty()) {
-            binding.jobInput.setError("O campo de trabalho é obrigatório")
+            binding.jobInput.error = getString(R.string.error_register_job)
             allFieldsValid = false
         }
 
         if (!validateDateOfBirth(birthDate)) {
-            binding.birthInput.setError("Data de nascimento inválido\nEx: dd/mm/yyyy")
+            binding.birthInput.error = getString(R.string.error_register_date)
             allFieldsValid = false
         }
 
@@ -140,7 +140,7 @@ class RegisterContactsFragment : Fragment() {
     }
 
     private fun validatePostalAddress(postalAddress: String): Boolean {
-        return postalAddress.matches("\\d{8}".toRegex())
+        return postalAddress.matches("^\\d{5}-\\d{3}$".toRegex())
     }
 
     private fun validateDateOfBirth(dateOfBirth: String): Boolean {
@@ -167,13 +167,13 @@ class RegisterContactsFragment : Fragment() {
                 .addOnSuccessListener {
                     Toast.makeText(
                         activity,
-                        "Contato editado com sucesso!!",
+                        getString(R.string.contact_edit_done),
                         Toast.LENGTH_LONG).show()
                 }
-                .addOnFailureListener { exception ->
+                .addOnFailureListener {
                     Toast.makeText(
                         activity,
-                        "Falha ao editar contato, tente novamente!",
+                        getString(R.string.contact_edit_error),
                         Toast.LENGTH_LONG).show()
                 }
 
@@ -185,29 +185,15 @@ class RegisterContactsFragment : Fragment() {
                     clearFields()
                     Toast.makeText(
                         activity,
-                        "Contato salvo com sucesso!!",
+                        getString(R.string.contact_register_done),
                         Toast.LENGTH_LONG).show()
                 }
                 .addOnFailureListener {
                     Toast.makeText(
                         activity,
-                        "Falha ao salvar contato, tente novamente!",
+                        getString(R.string.contact_register_error),
                         Toast.LENGTH_LONG).show()
                 }
         }
     }
-
-    private fun basicAlert(msg: String) {
-        val builder = AlertDialog.Builder(activity)
-        with(builder)
-        {
-            setTitle("Atenção")
-            setMessage(msg)
-            setPositiveButton("OK", null)
-            show()
-        }
-    }
-
-
-
 }

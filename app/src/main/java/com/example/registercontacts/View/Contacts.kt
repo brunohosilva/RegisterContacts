@@ -19,7 +19,6 @@ class Contacts : AppCompatActivity() {
             when (it.itemId) {
                 R.id.contatos -> replaceFragment(ListContactsFragment())
                 R.id.adicionar_contatos -> replaceFragment(RegisterContactsFragment())
-
                 else -> {}
             }
             true

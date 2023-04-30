@@ -1,15 +1,13 @@
 package com.example.registercontacts.Adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.registercontacts.Model.Contact
 import com.example.registercontacts.R
-import com.example.registercontacts.databinding.ContactItemBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -41,7 +39,7 @@ class ContactAdapter(
         holder.contactPhone.text = currentContact.phone
         holder.contactJob.text = currentContact.job
 
-        var keyContact = currentContact.id.toString()
+        val keyContact = currentContact.id.toString()
 
         holder.btnDelete.setOnClickListener {
             db = FirebaseFirestore.getInstance()
@@ -64,7 +62,7 @@ class ContactAdapter(
         val contactName: TextView = itemView.findViewById(R.id.tvcontactName)
         val contactPhone: TextView = itemView.findViewById(R.id.tvcontactPhone)
         val contactJob: TextView = itemView.findViewById(R.id.tvcontactJob)
-        var btnDelete: Button = itemView.findViewById(R.id.btn_apagar)
-        var btnEdit: Button = itemView.findViewById(R.id.btn_editar)
+        var btnDelete: ImageView = itemView.findViewById(R.id.btn_apagar)
+        var btnEdit: ImageView = itemView.findViewById(R.id.btn_editar)
     }
 }

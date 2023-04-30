@@ -4,14 +4,14 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="App Contatos"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.RegisterContacts">
         <activity
             android:name=".View.SignUp"
             android:exported="false"
-            android:label="Cadastrar" />
+            android:label="@string/register_contact" />
         <activity
             android:name=".View.RegisterContactsFragment"
             android:exported="false"
@@ -22,13 +22,12 @@
         <activity
             android:name=".View.Contacts"
             android:exported="false"
-            android:label="Contatos" />
+            android:label="@string/app_name" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
