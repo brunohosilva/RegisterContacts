@@ -8,6 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:paddingBottom="5dp"
         android:layout_height="match_parent">
 
         <ScrollView
@@ -24,85 +25,122 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
-
-                <EditText
-                    android:id="@+id/nameInput"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="Nome"
-                    android:inputType="textPersonName"
+                    android:paddingBottom="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:layout_editor_absoluteY="28dp" />
+                    android:hint="@string/contact_name"
+                    app:helperText="Ex. João Paulo"
+                    app:helperTextEnabled="true">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/nameInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/emailInput"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ems="10"
-                    android:hint="E-mail"
-                    android:inputType="textEmailAddress"
+                    android:paddingBottom="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/nameInput" />
+                    android:hint="@string/contact_mail"
+                    app:helperText="abc@def.com"
+                    app:helperTextEnabled="true">
 
-                <EditText
-                    android:id="@+id/phoneInput"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/emailInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:textColorHint="#757575" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ems="10"
-                    android:hint="Telefone"
-                    android:inputType="phone"
+                    android:paddingBottom="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/emailInput" />
+                    android:hint="@string/contact_phone"
+                    app:helperText="(xx) xxxxx-xxxx"
+                    app:helperTextEnabled="true">
 
-                <EditText
-                    android:id="@+id/postalAddressInput"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/phoneInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:textColorHint="#757575" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ems="10"
-                    android:hint="CEP"
-                    android:inputType="phone"
+                    android:paddingBottom="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/phoneInput" />
+                    android:hint="@string/contact_postal"
+                    app:helperText="xxxxx-xxx"
+                    app:helperTextEnabled="true">
 
-                <EditText
-                    android:id="@+id/jobInput"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/postalAddressInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:textColorHint="#757575" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ems="10"
-                    android:hint="Profissão"
-                    android:inputType="textPersonName"
-                    android:text=""
+                    android:paddingBottom="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/postalAddressInput" />
+                    android:hint="@string/contact_job"
+                    app:helperText="@string/contact_job"
+                    app:helperTextEnabled="true">
 
-                <EditText
-                    android:id="@+id/birthInput"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/jobInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:textColorHint="#757575" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:ems="10"
-                    android:hint="Data de nascimento"
-                    android:inputType="date"
+                    android:paddingBottom="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/jobInput" />
+                    android:hint="@string/contact_birthdate"
+                    app:helperText="00/00/0000"
+                    app:helperTextEnabled="true">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/birthInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="date" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
                     android:id="@+id/btnSalvar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="30dp"
-                    android:text="Salvar"
+                    android:text="@string/contact_save"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />

@@ -3,12 +3,10 @@ package com.example.registercontacts
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import com.example.registercontacts.View.*
+import com.example.registercontacts.View.Contacts
+import com.example.registercontacts.View.SignUp
 import com.example.registercontacts.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -40,18 +38,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpListener() {
-        binding.txtSignUp.setOnClickListener(View.OnClickListener {
+        binding.txtSignUp.setOnClickListener {
             val intent = Intent(this, SignUp::class.java)
             startActivity(intent)
-        })
+        }
+
         binding.btnEntrar.setOnClickListener(View.OnClickListener {
 
-            var email = binding.txtEmail.text.toString()
-            var password = binding.txtPassword.text.toString()
+            val email = binding.txtEmail.text.toString()
+            val password = binding.txtPassword.text.toString()
 
-            if (password.isNullOrEmpty() || email.isNullOrEmpty()) {
+            if (password.isEmpty() || email.isEmpty()) {
                 Toast.makeText(
-                    baseContext, "Preencha o e-mail e/ou a senha.",
+                    baseContext, getString(R.string.fields_for_login),
                     Toast.LENGTH_SHORT
                 ).show()
 
@@ -61,9 +60,9 @@ class MainActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        val user = auth.currentUser
+                        auth.currentUser
                         Toast.makeText(
-                            baseContext, "Login realizado com sucesso.",
+                            baseContext, getString(R.string.login_done),
                             Toast.LENGTH_SHORT
                         ).show()
                         val intent = Intent(this, Contacts::class.java)
@@ -71,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(
-                            baseContext, "Falha na autenticação. ${task.exception}",
+                            baseContext, getString(R.string.login_failed),
                             Toast.LENGTH_SHORT
                         ).show()
                     }

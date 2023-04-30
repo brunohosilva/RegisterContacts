@@ -29,15 +29,20 @@ class SignUp : AppCompatActivity() {
     }
 
     private fun setUpListener() {
-        binding.btnEntrar.setOnClickListener(View.OnClickListener {
+        binding.txtSignIn.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
-            var email = binding.txtEmail.text.toString().trim()
-            var password = binding.txtPassword.text.toString()
-            var confirmPassword = binding.txtPassword2.text.toString()
+        binding.btnRegister.setOnClickListener(View.OnClickListener {
 
-            if (email.isNullOrEmpty() || password.isNullOrEmpty() || confirmPassword.isNullOrEmpty()) {
+            val email = binding.txtEmail.text.toString().trim()
+            val password = binding.txtPassword.text.toString()
+            val confirmPassword = binding.txtPassword2.text.toString()
+
+            if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 Toast.makeText(
-                    baseContext, "Todos os campos são obrigatórios.",
+                    baseContext, getString(R.string.all_fields_required),
                     Toast.LENGTH_SHORT
                 ).show()
 
@@ -46,7 +51,7 @@ class SignUp : AppCompatActivity() {
 
             if(password.length < 6) {
                 Toast.makeText(
-                    baseContext, "A senha deve conter pelo menos 6 caracteres.",
+                    baseContext, getString(R.string.weak_password),
                     Toast.LENGTH_SHORT
                 ).show()
 
@@ -54,7 +59,7 @@ class SignUp : AppCompatActivity() {
             }
             if (password != confirmPassword) {
                 Toast.makeText(
-                    baseContext, "As senhas devem ser iguais.",
+                    baseContext, getString(R.string.match_password),
                     Toast.LENGTH_SHORT
                 ).show()
 
@@ -66,7 +71,7 @@ class SignUp : AppCompatActivity() {
                         val user = auth.currentUser
                         Log.d(TAG, user.toString())
                         Toast.makeText(
-                            baseContext, "Usuário cadastrado com sucesso.",
+                            baseContext, getString(R.string.user_registered),
                             Toast.LENGTH_SHORT
                         ).show()
                         val intent = Intent(this, MainActivity::class.java)
@@ -75,7 +80,7 @@ class SignUp : AppCompatActivity() {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "createUserWithEmail:failure", task.exception)
                         Toast.makeText(
-                            baseContext, "Erro ao cadastrar usuário. ${task.exception}",
+                            baseContext, getString(R.string.user_register_fail),
                             Toast.LENGTH_SHORT
                         ).show()
                     }

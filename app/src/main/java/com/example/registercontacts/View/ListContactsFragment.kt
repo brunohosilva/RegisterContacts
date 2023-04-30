@@ -1,22 +1,17 @@
 package com.example.registercontacts.View
 
-import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.registercontacts.Adapter.ContactAdapter
 import com.example.registercontacts.Adapter.CurrentContact
 import com.example.registercontacts.Model.Contact
 import com.example.registercontacts.R
-import com.example.registercontacts.databinding.ContactItemBinding
 import com.example.registercontacts.databinding.FragmentListContactsBinding
-import com.example.registercontacts.databinding.FragmentRegisterContactsBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -46,7 +41,7 @@ class ListContactsFragment : Fragment(), ContactAdapter.OnEditClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentListContactsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -64,21 +59,19 @@ class ListContactsFragment : Fragment(), ContactAdapter.OnEditClickListener {
     private fun contactInit() {
         db = FirebaseFirestore.getInstance()
         db.collection("contacts")
-            .addSnapshotListener { documents, key ->
+            .addSnapshotListener { documents, _ ->
                 contactList = arrayListOf()
-                if (documents != null) {
-                    documents.map { document ->
-                        val contact = Contact(
-                            id = document.id,
-                            name = document.getString("name"),
-                            email = document.getString("email"),
-                            phone = document.getString("phone"),
-                            job = document.getString("job"),
-                            postalAddress = document.getString("postalAddress"),
-                            birthDate = document.getString("birthDate")
-                        )
-                        contactList.add(contact)
-                    }
+                documents?.map { document ->
+                    val contact = Contact(
+                        id = document.id,
+                        name = document.getString("name"),
+                        email = document.getString("email"),
+                        phone = document.getString("phone"),
+                        job = document.getString("job"),
+                        postalAddress = document.getString("postalAddress"),
+                        birthDate = document.getString("birthDate")
+                    )
+                    contactList.add(contact)
                 }
                 recyclerView.adapter = ContactAdapter(contactList, this)
             }

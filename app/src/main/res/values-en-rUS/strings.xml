@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="contact_mail">Email</string>
+    <string name="contact_phone">Phone</string>
+    <string name="contact_postal">Postal Address</string>
+    <string name="app_name">Contacts</string>
+    <string name="login">Login</string>
+    <string name="contact_job">Job</string>
+    <string name="contact_birthdate">Birth Date</string>
+    <string name="contact_name">Name</string>
+    <string name="contact_save">Save</string>
+    <string name="register_contact">Register</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="password_contact">Password</string>
+    <string name="contact_bar">Contacts</string>
+    <string name="addcontact_bar">Register Contact</string>
+    <string name="error_register_name">Name field is required</string>
+    <string name="match_password">The passwords must match</string>
+    <string name="user_registered">User registered</string>
+    <string name="error_register_mail">Enter a valid email</string>
+    <string name="error_register_phone">Invalid phone number</string>
+    <string name="error_register_cep">Invalid postal address</string>
+    <string name="error_register_job">Job field is required</string>
+    <string name="error_register_date">Invalid birth date</string>
+    <string name="contact_edit_done">Contact edited</string>
+    <string name="contact_edit_error">Error editing contact, try again</string>
+    <string name="contact_register_done">Contact registered</string>
+    <string name="contact_register_error">Error while creating a new contact, please try again</string>
+    <string name="all_fields_required">All fields are necessary</string>
+    <string name="weak_password">The password must be at least 6 characters long</string>
+    <string name="user_register_fail">Error creating a new user</string>
+    <string name="login_failed">Authentication error</string>
+    <string name="login_done">Successful login</string>
+    <string name="fields_for_login">Fill both email and password fields</string>
+    <string name="user_exists">User already registered? Click here</string>
+    <string name="user_need_register">Need to register? Click here</string>
+</resources>
